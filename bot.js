@@ -98,7 +98,7 @@ bot.on('message', async (msg) => {
     else if(msg.content.startsWith(`${prefixCommand}say `)){
         let sayMessage = msg.content.replace(`${prefixCommand}say `, '')
         msg.delete().catch(O_o => {});
-        msg.channel.send(sayMessage)
+        msg.channel.send(sayMessage);
     }
 
     // touka?gifs
@@ -146,7 +146,7 @@ bot.on('message', async (msg) => {
     }
 
     // !play [link] = Bot toca músicas
-    else if (msg.content.startsWith(`${prefixCommand}${commands[5]} `)) {
+    else if (msg.content.startsWith(`${prefixCommand}play `)) {
         if (estouPronto) {
             let oQueTocar = msg.content.replace(`${prefixCommand}play `, '');
             try {
