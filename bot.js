@@ -18,9 +18,9 @@ const gifs= ['https://tenor.com/view/yasuo-league-leagueoflegends-of-legends-gif
 'https://tenor.com/view/lol-adc-sup-leagueoflegends-botlane-gif-9436487', 'https://tenor.com/view/trick2g-thegatesareopen-leagueoflegends-nasus-udyr-gif-4708506', 
 'https://tenor.com/view/blitzcrank-lo-l-league-league-of-legends-gif-14632741'];
 
-const insults = ['Baka!', 'Idiot!', 'Seu Tanso.']
-const commands = ['help', 'gifs', 'clean', 'join', 'play', 'pause', 'resume', 'end', 'leave']
+const insults = ['Baka!', 'Idiot!', 'Seu Tanso.'];
 
+const comands = ['help','gifs','clean','join','play ','pause','resume','end', 'leave']
 bot.on('ready', () => {
     console.log(`${bot.user.tag} has connected.`);
 });
@@ -57,7 +57,6 @@ bot.on('guildMemberAdd', async (member) => {
         embed.setTimestamp();
         await channel.send(embed)
     }
-
 });
 
 
@@ -72,7 +71,7 @@ bot.on('message', async (msg) => {
     if (!msg.content.startsWith(`${prefixCommand}`));
  
     //touka?help
-    else if (msg.content === `${prefixCommand}${commands[0]}`){
+    if (msg.content === `${prefixCommand}help`){
         let embed = new Discord.MessageEmbed()
         embed.setColor('#535787')
         embed.setAuthor(bot.user.tag, bot.user.displayAvatarURL())
@@ -102,13 +101,13 @@ bot.on('message', async (msg) => {
     }
 
     // touka?gifs
-    else if(msg.content === `${prefixCommand}${commands[1]}`){
+    else if(msg.content === `${prefixCommand}gifs`){
         var rand = gifs[Math.random() * gifs.length | 0]
         msg.channel.send(rand)
     }
 
     // touka?clean
-    else if (msg.content.startsWith(`${prefixCommand}${commands[2]} `)) {
+    if (msg.content.startsWith(`${prefixCommand}clean `)) {
         if(!msg.member.hasPermission("MANAGE_MESSAGES")){
             msg.channel.send('Você não tem permissão para executar esse comando! Baka!')
         } else{
@@ -123,7 +122,7 @@ bot.on('message', async (msg) => {
         }
     }
     // !join = Bot se junta ao canal de voz
-    else if (msg.content === `${prefixCommand}${commands[3]}`) {
+    else if (msg.content === `${prefixCommand}join`) {
         if (msg.member.voice.channel) { // agora é voice.channel no lugar de voiceChannel
 
             // Pegamos a referência que comentei acima aqui.
@@ -136,7 +135,7 @@ bot.on('message', async (msg) => {
     }
 
     // !leave = Bot sai do canal de voz
-    else if (msg.content === `${prefixCommand}${commands[4]}`) {
+    else if (msg.content === `${prefixCommand}leave`) {
         if (msg.member.voice.channel) {
             msg.member.voice.channel.leave();
             estouPronto = false;
@@ -219,7 +218,7 @@ bot.on('message', async (msg) => {
     }
 
     // touka?pause
-    else if (msg.content === `${prefixCommand}${commands[6]}`) {
+    else if (msg.content === `${prefixCommand}pause`) {
         if (msg.member.voice.channel) {
             connection = await msg.member.voice.channel.join();
             if (connection.dispatcher) {
@@ -234,11 +233,12 @@ bot.on('message', async (msg) => {
             }
         }
         else {
-            msg.channel.send('Vouce precisa estar conectado a um Canal de Voz! Baka');
+            msg.channel.send('Você precisa estar conectado a um Canal de Voz! Baka!');
         }
     }
+
     // touka?resume
-    else if (msg.content === `${prefixCommand}${commands[7]}`) {
+    else if (msg.content === `${prefixCommand}resume`) {
         if (msg.member.voice.channel) {
             connection = await msg.member.voice.channel.join();
             if (connection.dispatcher) {
@@ -256,8 +256,9 @@ bot.on('message', async (msg) => {
             msg.channel.send('Vouce precisa estar conectado a um Canal de Voz! Baka');
         }
     }
+
     // touka?end
-    else if (msg.content === `${prefixCommand}${commands[8]}`) {
+    else if (msg.content === `${prefixCommand}end`) {
         if (msg.member.voice.channel) {
             connection = await msg.member.voice.channel.join();
             if (connection.dispatcher) {
@@ -272,7 +273,7 @@ bot.on('message', async (msg) => {
         }
     }
     // touka?skip
-    else if (msg.content === `${prefixCommand}${commands[9]}`) {
+    else if (msg.content === `${prefixCommand}skip`) {
         if (msg.member.voice.channel) {
             connection = await msg.member.voice.channel.join();
             if (connection.dispatcher) {
@@ -291,10 +292,7 @@ bot.on('message', async (msg) => {
             msg.channel.send('Você precisa estar conectado a um Canal de Voz! Baka!');
         }
     }
-    else{
-        var randISULTS = insults[Math.random() * insults.length | 0]
-        msg.channel.send('ERROR[0] - ' + randISULTS)
-    }
+
 });
 
 function playMusic(msg) {
